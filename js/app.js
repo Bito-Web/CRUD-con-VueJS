@@ -5,7 +5,7 @@ const app = new Vue({
       subtitle: 'con VueJS',
       outStock: 'Sin Stock',
       productos: [],
-      nuevoId: 1,
+      // nuevoId: 1,
       nuevoProducto: '',
       nuevaCantidad: 0,
       total: 0,
@@ -30,12 +30,12 @@ const app = new Vue({
    methods: {
       agregarProducto() {
             this.productos.push({
-               id: this.nuevoId++,
+               // id: this.nuevoId++,
                nombre: this.nuevoProducto,
                cantidad: this.nuevaCantidad + '\t'
             })
          this.persist();
-         this.nuevoId = this.nuevoId;
+         // this.nuevoId = this.nuevoId;
          this.nuevoProducto = '';
          this.nuevaCantidad = '';
       },
