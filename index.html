@@ -1,79 +1,86 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <meta lang="es">
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="Software para registro de productoss comerciales">
-      <title></title>
-      <link rel="stylesheet" href="./css/app.css">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.14.0/css/all.css">
-      <script src="https://use.fontawesome.com/your-embed-code.js"></script>
-      <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    </head>
-   <body>
-      <div id="header">
-         <div class="header">
-            <h1 class="header__title">{{title}}</h1>
-            <h3 class="header__subtitle">{{subtitle}}</h3>
+<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/TR/html4/strict.dtd'>
+   <html>
+      <head profile='http://www.w3.org/2005/10/profile'>
+         <!-- META TAG -->
+         <meta lang='es'/>
+         <meta http-equiv='content-type' content='text/html' charset='utf-8'/>
+         <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+         <meta name='DC. title' content=''/>
+         <meta name='description' content=''/>
+         <meta name='copyright' content=''/>
+         <meta name='keyword' content=''/>
+         <meta name='viewport' content='width=device-width, inital-scale=1.0'/>
+         <meta name='robots' content='index, follow'/>
+
+         <!-- TITLE -->
+         <title>Juegos con VueJS</title>
+
+         <!-- CSS -->
+         <link rel='icon' type='img/png' href=''>
+         <link rel='stylesheet' type='text/css' href='./css/app.css'>
+      </head>
+      <body>
+
+         <div id='app'>
+            <header>
+               <h1>{{header.title}}</h1>
+               <h3>{{header.subtitle}}</h3>
+            </header>
+
+            <div class="juego" id="juego">
+
+               <h2>Juego: "Adivina la Fruta"</h2>
+
+               <div v-if="juego == false" class="juego_endGame">
+                  <h3 class="juego_endGame-win" v-if="win">¡¡¡Felicitaciones, completaste la palabra!!!</h3>
+                  <h4 class="juego_endGame-win" v-if="win && contador_errores === 0">Sin errores XD</h4>
+                  <h3 class="juego_endGame-lose" v-if="lose">¡¡¡Lo sentimos, no completaste la palabra!!!</h3>
+               </div>
+
+               <div class="juego_palabra">
+                  <span v-for="palabra in palabra_escrita">{{palabra}}</span>
+               </div>
+
+               <div class="juego_letras">
+                  <button v-for="(letra, index) in letras" @click="comparar(letra, index)" v-bind:disabled="botones[index]" v-bind:class="{verde: color_botones[index] == 'verde', rojo: color_botones[index] == 'rojo'}">{{letra}}</button>  
+               </div>
+
+               <div v-if="lose" class="juego_letras">
+                  <p>La palabra correcta era: <span>"{{palabra_generada}}"</span></p>
+               </div>
+
+               <div class="juego_btn-contadores">
+
+                  <div class="juego_btn-contadores-btnJugar">
+                     <a href="#juego"><button type="button" @click="generarAleatorio()">Jugar</button></a>
+                  </div>
+
+                  <div class="juego_btn-contadores-contadores">
+                     <p>Aciertos:</p>
+                     <p class="number-verde">{{contador_aciertos}}</p>
+                     <p>Errores:</p>
+                     <p class="number-rojo">{{contador_errores}}</p>
+                  </div>
+
+                  <div class="juego_btn-contadores-contadores">
+                     <p>Ganados:</p>
+                     <p class="number-verde">{{win_contador}}</p>
+                     <p>Perdidos:</p>
+                     <p class="number-rojo">{{lose_contador}}</p>
+                  </div>
+
+               </div>
+            </div>
+
+            <footer>
+               <img :src="footer.img.src" :title="footer.img.title" :alt="footer.img.alt">
+               <a :href="footer.link.href" :title="footer.link.title" target="_blank">{{footer.link.title}}</a>
+            </footer>
          </div>
-      </div>
 
-      <div id="app">
-         <fieldset class="table">
-            <legend class="table__title">
-               <h4>Registro de Productos</h4>
-            </legend>
-            <form class="table__add-product">
-               <input id="add__product-input" type="text" v-model="nuevoProducto" @keyup.enter="validation()" placeholder="Productos" title="Solo letras">
-               <input id="add__cant-input" type="number" v-model.number="nuevaCantidad" @keyup.enter="validation()" min="0" placeholder="0" title="Solo números">
-               <button v-if="productos" @click="validation()" id="add" title="Agregar a la lista">Agregar</button>
-               <button v-if="productos" @click="saveProductos()" id="save" title="Guardar en el Local Storage">Guardar</button>
-            </form>
-            <p class="table__MSG" v-if="errorMSG !== '' || exitoMSG !== ''" v-bind="timer()">
-               {{errorMSG}}{{exitoMSG}}
-               <button @click="errorMSG = '', exitoMSG = ''">
-                  <i class="fas fa-trash-alt"></i>
-               </button>
-            </p>
-            <div class="table__row-head">
-               <div class="table__row-head-column col-1">
-                  <p>+/-</p>
-               </div>
-               <div class="table__row-head-column col-2">
-                  <p>Cantidad</p>
-                  <p>Id</p>
-               </div>
-               <div class="table__row-head-column col-3">
-                  <p>Productos</p>
-               </div>
-            </div>
-            <div id="table_row-body" :id="producto.id" class="table__row-body" v-for="(producto, index) of productos" v-if="producto.nombre">
-               <div class="table__row-body-column col-1">
-                  <button class="plus-green" @click="producto.cantidad++" v-if="producto.nombre"><i class="fas fa-plus-square"></i></button>
-                  <button class="less" @click="producto.cantidad > 0 ? producto.cantidad-- : null" v-if="producto.cantidad > 0"><i class="fas fa-minus-square"></i></button>
-                  <button class="delete" @click="eliminarProducto(index)" v-if="producto.cantidad === 0 || producto.cantidad === ''"><i class="fas fa-trash-alt"></i></button>
-               </div>
-               <div class="table__row-body-column col-2">
-                  <input title="Click para ditar" v-if="producto.nombre" v-model.number="producto.cantidad" @keyup.enter="saveProductos()" />
-                  <p v-if="producto.nombre" >{{index}}</p>
-               </div>
-               <div class="table__row-body-column col-3">
-                  <p>{{producto.nombre}}<b v-if="producto.cantidad === 0 || producto.cantidad === ''"> - {{outStock}}</b></p>
-               </div>
-            </div>
-            <div class="table__total">
-               <h4>Total: <span v-if="sumarStock > 0">{{sumarStock}}</span><b v-if="sumarStock === '' || sumarStock === 0">{{outStock}}</b></h4>
-               <button v-if="productos" @click="exportData()">Exportar a CSV</button>
-               <a id="export" href="">Descargar</a>
-            </div>
-         </fieldset>
-      </div>
-
-      <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-      <script src="./js/app.js"></script>
-      <script src="./js/header.js"></script>
-   </body>
-   <footer>
-   </footer>
-</html>
+         <!-- JS -->
+         <!-- development version, includes helpful console warnings -->
+         <script src='https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js'></script>
+         <script src='./js/app.js'></script>
+      </body>
+   </html>

@@ -1,410 +1,273 @@
 * {
-  margin: 0px;
-  padding: 0px;
+  margin: 0 0;
+  padding: 0 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  width: 100%;
-  font-size: 14px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #555;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 700;
 }
 
 body {
+  max-width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   background-color: #ededed;
 }
 
-#header .header {
-  margin: 0px;
-  padding: 10px 0px;
-}
-
-#header .header__title {
-  margin: 0px;
-  padding: 5px 0px;
+body #app header {
+  padding: 20px 0;
   text-align: center;
-  font-size: 28px;
+  background-color: #4a66c2;
 }
 
-#header .header__subtitle {
-  margin: 0px;
-  padding: 5px 0px;
-  font-size: 22px;
-  text-align: center;
+body #app header h1 {
+  color: #fff;
+  line-height: 2;
 }
 
-#app {
-  margin: 0 auto;
-  padding: 20px 0px;
+body #app header h3 {
+  color: #fff;
+  line-height: 1.5;
+}
+
+body #app .juego {
+  margin: auto;
+  padding: 20px;
+  width: 80%;
+  display: block;
   background-color: #fff;
-  width: 100%;
 }
 
-#app .table {
-  margin: 0 auto;
-  padding: 10px;
-  width: 50%;
-  border: 1px solid #999;
-  border-radius: 5px;
-}
-
-@media (max-width: 1300px) {
-  #app .table {
-    width: 90%;
+@media (max-width: 1023px) {
+  body #app .juego {
+    width: 100%;
   }
 }
 
-#app .table__title {
-  margin: 0px;
-  padding: 5px 10px;
-  width: auto;
-  border: 1px solid #999;
-  border-radius: 5px;
-}
-
-#app .table__title h4 {
-  margin: 0px;
-  padding: 0px;
-  font-size: 20px;
+body #app .juego h2 {
+  padding: 10px 0;
   text-align: center;
-  color: #333;
 }
 
-#app .table__add-product {
-  margin: 0px auto;
-  padding: 10px;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 6fr 2fr 2fr 2fr;
-      grid-template-columns: 6fr 2fr 2fr 2fr;
-  background-color: #ededed;
-  border-radius: 5px 5px 0px 0px;
-}
-
-#app .table__add-product input {
+body #app .juego_endGame {
   margin: auto;
-  padding: 5px 10px;
-  width: 95%;
-  display: block;
+  padding: 10px 0;
+  width: 80%;
+  text-align: center;
 }
 
-#app .table__add-product input:hover::-webkit-input-placeholder {
-  font-size: 10px;
-  -webkit-transform: translateX(75%);
-          transform: translateX(75%);
-  -webkit-transition-duration: 1.5s;
-          transition-duration: 1.5s;
+body #app .juego_endGame-win {
+  color: #25b12c;
 }
 
-#app .table__add-product input:hover:-ms-input-placeholder {
-  font-size: 10px;
-  transform: translateX(75%);
-  transition-duration: 1.5s;
+body #app .juego_endGame-lose {
+  color: #cc1717;
 }
 
-#app .table__add-product input:hover::-ms-input-placeholder {
-  font-size: 10px;
-  transform: translateX(75%);
-  transition-duration: 1.5s;
-}
-
-#app .table__add-product input:hover::placeholder {
-  font-size: 10px;
-  -webkit-transform: translateX(75%);
-          transform: translateX(75%);
-  -webkit-transition-duration: 1.5s;
-          transition-duration: 1.5s;
-}
-
-#app .table__add-product button {
-  margin: 0px auto;
-  padding: 5px;
-  width: 95%;
-  display: block;
-  background-color: #035797;
-  color: #fff;
-  border-radius: 5px;
-  outline: none;
-  border: none;
-}
-
-#app .table__add-product button:hover {
-  background-color: #0769c5;
-}
-
-#app .table__add-product button:active {
-  background-color: #0584fa;
-}
-
-#app .table__MSG {
-  margin: 0px;
-  padding: 0px 20px;
-  width: 100%;
-  display: block;
-  background-color: #f33;
-  font-size: 12px;
-  line-height: 1.5;
-  color: #fff;
-  font-weight: bold;
+body #app .juego_palabra {
+  margin: auto;
+  padding: 10px 0;
+  width: 80%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-#app .table__MSG button {
-  margin-left: auto;
-  width: 5%;
-  display: inline-block;
-  right: 0px;
-  border: none;
-  outline: none;
-  background-color: #bb0404;
-  color: #fff;
-}
-
-#app .table__MSG button:hover {
-  background-color: #d10707;
-}
-
-#app .table__MSG button:active {
-  background-color: #fc2d08;
-}
-
-#app .table__row-head {
-  margin: 0px;
-  padding: 10px;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (4fr)[3];
-      grid-template-columns: repeat(3, 4fr);
-  color: #333;
-}
-
-#app .table__row-head-column {
-  padding: 5px 0px;
-}
-
-#app .table__row-head-column.col-1 {
-  margin: 0px;
-  padding: 0px;
-  text-align: center;
-  display: block;
-}
-
-#app .table__row-head-column.col-1 p {
-  margin: auto;
-  padding: 0px;
-  font-size: 20px;
-  width: 100%;
-  display: block;
-  font-weight: bold;
-}
-
-#app .table__row-head-column.col-2 {
-  margin: 0px;
-  padding: 0px;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (6fr)[2];
-      grid-template-columns: repeat(2, 6fr);
-}
-
-#app .table__row-head-column.col-2 p {
-  margin: 0px;
-  padding: 0px;
-  font-size: 20px;
-  width: 100%;
-  display: block;
-  font-weight: bold;
-  text-align: center;
-}
-
-#app .table__row-head-column.col-3 {
-  margin: 0px;
-  padding: 0px;
-}
-
-#app .table__row-head-column.col-3 p {
-  margin: 0px;
-  padding: 0px;
-  font-size: 20px;
-  width: 100%;
-  display: block;
-  font-weight: bold;
-}
-
-#app .table__row-body {
-  margin: 0px;
-  padding: 10px;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (4fr)[3];
-      grid-template-columns: repeat(3, 4fr);
-  font-size: 14px;
-}
-
-#app .table__row-body:hover {
-  background-color: #ededed;
-}
-
-#app .table__row-body-column {
+body #app .juego_palabra span {
+  margin: 1px;
   padding: 0px 0px;
-}
-
-#app .table__row-body-column.col-1 {
-  margin: auto;
-  padding: 0px 0px;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (6fr)[2];
-      grid-template-columns: repeat(2, 6fr);
-}
-
-#app .table__row-body-column.col-1 button {
-  margin: auto;
-  padding: 10px 10px;
-  width: 75%;
-  display: block;
+  text-align: center;
+  border: 2px solid #999;
   border-radius: 5px;
-  border: none;
+  line-height: 50px;
+  min-height: 50px;
+  min-width: 50px;
+}
+
+body #app .juego_letras {
+  margin: auto;
+  padding: 10px 0;
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media (max-width: 1023px) {
+  body #app .juego_letras {
+    width: 100%;
+  }
+}
+
+body #app .juego_letras button {
+  margin: 1px;
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 5px;
   outline: none;
+  line-height: 50px;
+  min-height: 50px;
+  min-width: 50px;
 }
 
-#app .table__row-body-column.col-1 .plus-green {
-  background-color: #03972d;
-  color: #fff;
-}
-
-#app .table__row-body-column.col-1 .plus-green:hover {
-  background-color: #3aac47;
-}
-
-#app .table__row-body-column.col-1 .plus-green:active {
-  background-color: #0be90b;
-}
-
-#app .table__row-body-column.col-1 .plus-orange {
-  background-color: #976303;
-  color: #fff;
-}
-
-#app .table__row-body-column.col-1 .plus-orange:hover {
-  background-color: #ac953a;
-}
-
-#app .table__row-body-column.col-1 .plus-orange:active {
-  background-color: #e99b0b;
-}
-
-#app .table__row-body-column.col-1 .less {
-  background-color: #bb0404;
-  color: #fff;
-}
-
-#app .table__row-body-column.col-1 .less:hover {
-  background-color: #d10707;
-}
-
-#app .table__row-body-column.col-1 .less:active {
-  background-color: #fc2d08;
-}
-
-#app .table__row-body-column.col-1 .delete {
-  background-color: #bb0404;
-  color: #fff;
-}
-
-#app .table__row-body-column.col-1 .delete:hover {
-  background-color: #d10707;
-}
-
-#app .table__row-body-column.col-1 .delete:active {
-  background-color: #fc2d08;
-}
-
-#app .table__row-body-column.col-2 {
-  margin: auto;
-  padding: 0px 0px;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (6fr)[2];
-      grid-template-columns: repeat(2, 6fr);
-}
-
-#app .table__row-body-column.col-2 input {
-  margin: auto;
-  padding: 5px 10px;
-  width: 75%;
-  display: block;
+body #app .juego_letras button:hover {
+  background-color: #fff;
+  border-color: #0f87d6;
   color: #555;
-  text-align: center;
+  font-weight: 700;
 }
 
-#app .table__row-body-column.col-2 p {
-  margin: auto;
-  padding: 0px 10px;
-  width: 75%;
-  display: block;
-  color: #555;
-  text-align: center;
-  font-weight: bold;
+body #app .juego_letras .rojo {
+  border-color: #cc1717;
+  background-color: #f57;
+  color: #fff;
+  font-weight: 700;
 }
 
-#app .table__row-body-column.col-3 {
-  margin: auto;
-  padding: 0px;
+body #app .juego_letras .verde {
+  border-color: #25b12c;
+  background-color: #55ff7a;
+  color: #fff;
+  font-weight: 700;
 }
 
-#app .table__row-body-column.col-3 p {
-  margin: auto;
-  padding: 0px 10px;
+body #app .juego_letras p {
+  padding: 5px;
   width: 100%;
-  display: block;
+}
+
+body #app .juego_letras p span {
+  padding: 5px;
+  border: 2px solid #cc1717;
+  border-radius: 5px;
+  color: #555;
+  font-weight: 700;
   text-transform: capitalize;
 }
 
-#app .table__row-body-column.col-3 p b {
-  font-size: 10px;
-  color: red;
-}
-
-#app .table__total {
-  margin: 0px;
-  padding: 10px;
-  background-color: #ededed;
-  border-radius: 0px 0px 5px 5px;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 8fr 4fr;
-      grid-template-columns: 8fr 4fr;
-}
-
-#app .table__total h4 {
-  margin: 0px;
-  padding: 5px;
-  color: #333;
-}
-
-#app .table__total h4 b {
-  font-size: 10px;
-  color: red;
-}
-
-#app .table__total button {
+body #app .juego_btn-contadores {
   margin: auto;
-  padding: 5px;
-  width: 75%;
+  padding: 10px 0;
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media (max-width: 1023px) {
+  body #app .juego_btn-contadores {
+    width: 100%;
+  }
+}
+
+body #app .juego_btn-contadores-contadores {
+  margin: auto;
+  padding: 10px 0;
+}
+
+body #app .juego_btn-contadores-contadores p {
+  line-height: 2;
+  font-weight: 700;
+}
+
+body #app .juego_btn-contadores-contadores .number-rojo {
+  line-height: 3;
+  width: 100%;
+  text-align: center;
+  border: 2px solid #cc1717;
+  border-radius: 5px;
+  font-weight: 700;
+}
+
+body #app .juego_btn-contadores-contadores .number-verde {
+  line-height: 3;
+  width: 100%;
+  text-align: center;
+  border: 2px solid #25b12c;
+  border-radius: 5px;
+  font-weight: 700;
+}
+
+body #app .juego_btn-contadores-btnJugar {
+  margin: auto;
+  padding: 10px 0;
+}
+
+body #app .juego_btn-contadores-btnJugar a button {
+  margin: auto;
+  padding: 10px 20px;
   display: block;
-  background-color: #035797;
-  color: #fff;
+  border: 2px solid #ccc;
   border-radius: 5px;
   outline: none;
-  border: none;
+  background-color: #ededed;
+  color: #555;
+  width: 100px;
 }
 
-#app .table__total button:hover {
-  background-color: #0769c5;
+body #app .juego_btn-contadores-btnJugar a button:hover {
+  background-color: #fff;
+  border-color: #0f87d6;
+  color: #555;
+  font-weight: 700;
 }
 
-#app .table__total button:active {
-  background-color: #0584fa;
+body #app footer {
+  line-height: 6;
+  text-align: center;
+  background-color: #acbacb;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body #app footer img {
+  margin-right: 10px;
+  width: 35px;
+  height: auto;
+}
+
+body #app footer a {
+  color: #fff;
+}
+
+body #app footer a:hover {
+  color: #f57;
+  text-decoration: underline;
 }
 /*# sourceMappingURL=app.css.map */

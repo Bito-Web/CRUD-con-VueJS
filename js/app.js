@@ -1,120 +1,149 @@
-const app = new Vue({
+// document.addEventListener('DOMContentLoaded', function(name) {
+//    let nombre = prompt('Escribe tu nombre');
+
+//    if (nombre !== '') {
+//       alert('Bienvenido ' + nombre + ' a mi primer juego con Javascript!!!')
+//    }else{
+//       alert('Por favor, debes escribir tu nombre...')
+//    }
+
+// }, false);
+
+const App = new Vue({
    el: '#app',
-   data: {
-      title: 'Sintaxis de Javascript',
-      subtitle: 'con VueJS',
-      outStock: 'Sin Stock',
-      productos: [],
-      // nuevoId: 1,
-      nuevoProducto: '',
-      nuevaCantidad: 0,
-      total: 0,
-      errorMSG: '',
-      exitoMSG: '',
-      disabled: false
-   },
-   mounted() {
-      if (localStorage.getItem('productos')) {
-         try {
-            this.productos = JSON.parse(localStorage.getItem('productos'));
-         }catch(e) {
-            localStorage.removeItem('productos');
-         }
-      }
-   },
-   watch: {
-      productos(loadproductos) {
-         localStorage.productos = JSON.stringify(loadproductos);
-      }
-   },
-   methods: {
-      agregarProducto() {
-            this.productos.push({
-               // id: this.nuevoId++,
-               nombre: this.nuevoProducto,
-               cantidad: this.nuevaCantidad + '\t'
-            })
-         this.persist();
-         // this.nuevoId = this.nuevoId;
-         this.nuevoProducto = '';
-         this.nuevaCantidad = '';
+   data:
+   {
+      header:
+      {
+         title: 'Juegos Web con HTML5 y Javascript',
+         subtitle: 'Canal de youtube de "Sistemas y Micros"'
       },
-      validation() {
-         let error = false;
-         if(this.nuevoProducto === '') {
-            this.errorMSG = 'Productos no puede estar vacío \n';
-            error = true;
-         }else if(!isNaN(this.nuevoProducto)) {
-            this.errorMSG = 'Productos no puede ser numérico \n';
-            error = true;
-         }else if(this.nuevoProducto.length < 3 || this.nuevoProducto.length > 15) {
-            this.errorMSG = 'Productos debe tener mínimo 3 carácteres y máximo 15 \n';
-            error = true;
-         }else if(isNaN(this.nuevaCantidad)) {
-            this.errorMSG = 'Cantidad solo pueser ser numérico \n';
-            error = true;
-         }else if(error) {
-            this.errorMSG.push();
-            error = false;
-         }else{
-            this.agregarProducto();
-            this.exitoMSG.push('Productos agregado satisfactoriamente \n');
-            error = false;
+      footer:
+      {
+         link:
+         {
+            title: 'Referencia "Adivina la Fruta"',
+            href: 'https://www.youtube.com/watch?v=HSkl-A7QSrs'
+         },
+         img:
+         {
+            title: 'Youtube',
+            alt: 'Ícono Youtube',
+            src: 'https://logodownload.org/wp-content/uploads/2014/10/youtube-logo-5-2.png'
          }
       },
-      eliminarProducto(index) {
-         this.productos.splice(index, 1);
-         this.saveProductos();
+      juego: false,
+      win: false,
+      lose: false,
+      contador_aciertos: 0,
+      contador_errores: 0,
+      win_contador: 0,
+      lose_contador: 0,
+      aleatorio: 0,
+      palabra_escrita: [],
+      botones: [],
+      color_botones: [],
+      letras: 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ',
+      palabras: 
+      [
+         'manzana',
+         'pera',
+         'banana',
+         'naranja',
+         'mandarina',
+         'durazno',
+         'mora',
+         'anana',
+         'kiwi',
+         'pomelo',
+         'frambuesa',
+         'melocoton',
+         'cereza',
+         'frutilla',
+         'arandano',
+         'melon',
+         'papaya',
+         'platano',
+         'tamarindo',
+         'mango',
+         'limon',
+         'palta',
+         'tomate',
+         'pepino',
+         'zapallito',
+         'zapallo',
+         'berenjena',
+         'morron',
+         'ciruela',
+         'maracuya',
+         'uva',
+         'sandia',
+         'coco'
+      ]
+   },
+   methods: 
+   {
+      generarAleatorio: function() {
+         this.juego = true,
+         this.win = false,
+         this.lose = false,
+         this.contador_aciertos = 0,
+         this.contador_errores = 0,
+         this.aleatorio = Math.floor(Math.random() * this.palabras.length);
+         this.palabra_escrita = [],
+         this.botones = [],
+         this.color_botones = []
+
+         for (let i = 0; i < this.palabras[this.aleatorio].length; i++) {
+            this.palabra_escrita.push('')
+         }
+         return this.aleatorio;
       },
-      timer(){
-         setTimeout( () => {
-            this.exitoMSG = '';
-            this.errorMSG = '';
-         }, 5000);
-      },
-      saveProductos() {
-         let exito = false;
-         if(localStorage.productos) {
-            document.getElementsById('add__product-input').innerHTML='';
-            document.getElementsById('add__cant-input').innerHTML='';
-            const parsed = JSON.stringify(this.productos);
-            localStorage.setItem('productos', parsed);
-            exito = true;
-            this.exitoMSG = '¡Guardado! \n';
+      comparar: function(caracter, posicion) {
+         if (this.juego) {
+            this.botones[posicion] = true;
+            let flat = 0;
             
-         }else{
-            exito = false;
-            this.errorMSG = 'No hay datos para guardar \n';
-         }
-         if (exito){
-            this.agregarProducto();
-            this.exitoMSG.push();
-            exitoMSG = false;
-         }else{
-            this.errorMSG.push();
-            errorMSG = false;
+            for (i = 0; i <= this.palabra_generada.length; i++) {    
+               if (caracter.toLowerCase() === this.palabra_generada[i]) {
+                  this.palabra_escrita[i] = caracter;
+                  this.contador_aciertos++;
+                  flat++;
+               }     
+            }
+
+            if (flat == 0) {
+               this.contador_errores++;
+               this.color_botones[posicion] = 'rojo';
+            }else{
+               this.color_botones[posicion] = 'verde';
+            }
+
+            if (this.contador_aciertos === this.palabra_generada.length) {
+               this.win = true;
+               this.juego = false;
+               this.win_contador++;
+            }
+
+            if (this.contador_errores === 5) {
+               this.lose = true;
+               this.juego = false;
+               this.lose_contador++;
+            }
+
+            console.log('Generada: '+ this.palabra_generada.length);
+            console.log('Escrita: '+ this.palabra_escrita.length);
+            console.log('Ganado: '+ win_contador + ' Perdido: ' + lose_contador);
          }
       },
-      persist() {
-         const parsed = JSON.stringify(this.productos);
-         localStorage.setItem('productos', parsed);
-      },
-      exportData() {
-         var item = localStorage.csv = JSON.stringify(this.productos);
-         var blob = new Blob([localStorage.getItem('csv')], {type: "text/csv"});
-         var url = URL.createObjectURL(blob);
-         var a = document.querySelector("#export");
-         a.href = url;
-         a.download = "Productos.csv";
-     }
    },
-   computed: {
-      sumarStock() {
-         this.total = 0;
-         for(producto of this.productos){
-            this.total = this.total + producto.cantidad;
-         }
-         return this.total;
+   computed:
+   {
+      palabra_generada: function() {
+         return this.palabras[this.aleatorio];
       }
+   },
+   created: function() {
+
    }
 });
